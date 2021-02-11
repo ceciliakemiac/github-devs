@@ -19,7 +19,7 @@ function ShortUser(props) {
             <p>{props.name}</p>
           </div>
         </div>
-        <div>
+        <div >
           <h3 style={{ display: 'flex', justifyContent: 'center' }} >Repositórios</h3>
           <div style={{ width: '100%', height: '90%', margin: '5%' }} >
             {props.repos.map(renderRepo)}
