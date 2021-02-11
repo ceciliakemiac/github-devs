@@ -14,7 +14,6 @@ function Home(props) {
   const [imageUrl, setImageUrl] = useState('');
   const [repos, setRepos] = useState([]);
   const [hasUser, setHasUser] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState(false);
 
   const getDevInfos = () => {
