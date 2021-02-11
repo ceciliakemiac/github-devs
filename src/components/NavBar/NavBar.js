@@ -18,7 +18,7 @@ const NavBar = () => {
   return (
     <nav>
       <Navbar>
-        <InputSearch />
+        <h2>Procure seu dev do github!</h2>
       </Navbar>
     </nav>
   );

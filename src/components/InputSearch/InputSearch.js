@@ -1,31 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 
 import * as actionCreators from '../../store/actions';
 
 const Input = styled.input`
-  padding: 0.5em;
-  margin: 0.5em;
-  color: ${props => props.inputColor || "palevioletred"};
-  background: papayawhip;
+  padding: 1em;
+  margin: 1em;
+  color: gray;
+  background: white;
   border: none;
   border-radius: 3px;
+  width: 250px
 `;
 
 const InputSearch = (props) => {
-  console.log("TESTE")
-  console.log(props.dev);
   return (
     <div>
       <Input
         type="text"
-        placeholder="Search Dev"
+        placeholder="Busque seu Dev"
         value={props.dev}
+        defaultValue={props.dev}
         onChange={e => props.onChangeDev(e.target.value)} />
-      <Button variant="contained"><SearchIcon /></Button>
     </div>
   )
 }
