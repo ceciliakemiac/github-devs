@@ -14,31 +14,33 @@ function Home(props) {
   const [imageUrl, setImageUrl] = useState('');
   const [repos, setRepos] = useState([]);
   const [hasUser, setHasUser] = useState(false);
-  // const [erro, setErro] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [erro, setErro] = useState(false);
 
   const getDevInfos = () => {
+    local.addLoad();
     Service.getDev(props.dev)
       .then(res => {
         setHasUser(true);
-        local.removeErro();
+        setErro(false);
         setLogin(res.data.login);
         setImageUrl(res.data.avatar_url);
       })
       .catch(erro => {
         setHasUser(false);
-        local.addErro();
+        setErro(true)
         console.log("ERRO ", erro)
       });
 
     Service.getRepos(props.dev)
       .then(res => {
-        local.removeErro();
         setRepos(res.data);
       })
       .catch(erro => {
-        local.addErro();
+        setErro(true)
         console.log("ERRO ", erro)
       });
+    local.removeLoad();
   }
 
   return (
@@ -49,8 +51,9 @@ function Home(props) {
         <Button variant="contained" onClick={() => getDevInfos()} ><SearchIcon /></Button>
       </div>
       <div style={{ width: '80%', height: '70%', marginTop: '5%', marginBottom: '5%', marginLeft: '10%' }} >
-        {local.hasErro() && <h2>Erro ao procurar usuário</h2>}
-        {hasUser && !local.hasErro() && <ShortUser imagem={imageUrl} name={login} repos={repos} />}
+        {local.hasLoad() && <h2>Carregando...</h2>}
+        {erro && <h2>Erro ao procurar usuário</h2>}
+        {hasUser && !erro && <ShortUser imagem={imageUrl} name={login} repos={repos} />}
       </div>
     </div>
   )

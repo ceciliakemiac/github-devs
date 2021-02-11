@@ -1,10 +1,10 @@
-export const LOAD_ERRO = 'LoadErro'
-export const hasErro = () => {
-  return localStorage.getItem(LOAD_ERRO) !== null;
+export const LOADING = 'Loading'
+export const hasLoad = () => {
+  return localStorage.getItem(LOADING) !== null;
 }
-export const addErro = () => {
-  localStorage.setItem(LOAD_ERRO, true);
+export const addLoad = () => {
+  localStorage.setItem(LOADING, true);
 }
-export const removeErro = () => {
-  localStorage.removeItem(LOAD_ERRO);
+export const removeLoad = () => {
+  localStorage.removeItem(LOADING);
 }
