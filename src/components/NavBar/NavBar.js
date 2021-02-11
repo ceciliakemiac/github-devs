@@ -9,7 +9,7 @@ const Navbar = styled.div`
   width:100%;
   z-index: 5;
   height: 5em;
-  background-color: #8888;
+  background-color: #888;
 `;
 
 function NavBar() {
