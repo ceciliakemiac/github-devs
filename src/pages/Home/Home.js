@@ -7,35 +7,36 @@ import NavBar from '../../components/NavBar/NavBar';
 import Service from '../../service/axios';
 import ShortUser from '../../components/ShortUser/ShortUser';
 import InputSearch from '../../components/InputSearch/InputSearch';
+import * as local from '../../service/local';
 
 function Home(props) {
   const [login, setLogin] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [repos, setRepos] = useState([]);
   const [hasUser, setHasUser] = useState(false);
-  const [erro, setErro] = useState(false);
+  // const [erro, setErro] = useState(false);
 
   const getDevInfos = () => {
     Service.getDev(props.dev)
       .then(res => {
         setHasUser(true);
-        setErro(false);
+        local.removeErro();
         setLogin(res.data.login);
         setImageUrl(res.data.avatar_url);
       })
       .catch(erro => {
         setHasUser(false);
-        setErro(true);
+        local.addErro();
         console.log("ERRO ", erro)
       });
 
     Service.getRepos(props.dev)
       .then(res => {
-        setErro(false);
+        local.removeErro();
         setRepos(res.data);
       })
       .catch(erro => {
-        setErro(true);
+        local.addErro();
         console.log("ERRO ", erro)
       });
   }
@@ -48,8 +49,8 @@ function Home(props) {
         <Button variant="contained" onClick={() => getDevInfos()} ><SearchIcon /></Button>
       </div>
       <div style={{ width: '80%', height: '70%', marginTop: '5%', marginBottom: '5%', marginLeft: '10%' }} >
-        {(!hasUser || erro) && <h2>Erro ao procurar usuário</h2>}
-        {hasUser && !erro && <ShortUser imagem={imageUrl} name={login} repos={repos} />}
+        {local.hasErro() && <h2>Erro ao procurar usuário</h2>}
+        {hasUser && !local.hasErro() && <ShortUser imagem={imageUrl} name={login} repos={repos} />}
       </div>
     </div>
   )

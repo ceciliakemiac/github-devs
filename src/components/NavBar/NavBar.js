@@ -1,7 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-
-import InputSearch from '../InputSearch/InputSearch';
 
 const Navbar = styled.div`
   position: fixed;
@@ -11,10 +9,11 @@ const Navbar = styled.div`
   width:100%;
   z-index: 5;
   height: 5em;
-  background-color: #888;
+  background-color: #8888;
 `;
 
-const NavBar = () => {
+function NavBar() {
+
   return (
     <nav>
       <Navbar>
